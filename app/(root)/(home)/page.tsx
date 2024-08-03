@@ -5,97 +5,12 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 import React from "react";
 
-const Home = () => {
-    const questions = [
-        {
-            _id: "1",
-            title: "What is the best way to learn TypeScript?",
-            tags: [
-                { _id: "1", name: "TypeScript" },
-                { _id: "2", name: "Programming" },
-            ],
-            author: {
-                _id: "1",
-                name: "Alice Johnson",
-                picture: "https://example.com/picture1.jpg",
-            },
-            upvotes: 123,
-            views: 456,
-            answers: [
-                {
-                    _id: "1",
-                    content:
-                        "You can start by reading the official documentation and practicing.",
-                },
-                {
-                    _id: "2",
-                    content:
-                        "There are great courses on Udemy and free resources on YouTube.",
-                },
-            ],
-            createdAt: new Date("2021-07-01T10:00:00Z"),
-        },
-        {
-            _id: "2",
-            title: "How to implement authentication in a React application?",
-            tags: [
-                { _id: "3", name: "React" },
-                { _id: "4", name: "Authentication" },
-            ],
-            author: {
-                _id: "2",
-                name: "Bob Smith",
-                picture: "https://example.com/picture2.jpg",
-            },
-            upvotes: 98,
-            views: 322,
-            answers: [
-                {
-                    _id: "3",
-                    content:
-                        "You can use libraries like Firebase or Auth0 for authentication.",
-                },
-                {
-                    _id: "4",
-                    content:
-                        "Consider implementing JWT tokens for better security.",
-                },
-            ],
-            createdAt: new Date("2024-06-15T14:30:00Z"),
-        },
-        {
-            _id: "3",
-            title: "What are the benefits of using GraphQL over REST?",
-            tags: [
-                { _id: "5", name: "GraphQL" },
-                { _id: "6", name: "API" },
-            ],
-            author: {
-                _id: "3",
-                name: "Charlie Davis",
-                picture: "https://example.com/picture3.jpg",
-            },
-            upvotes: 156,
-            views: 789,
-            answers: [
-                {
-                    _id: "5",
-                    content:
-                        "GraphQL allows for more flexible queries and reduces over-fetching.",
-                },
-                {
-                    _id: "6",
-                    content:
-                        "It's easier to evolve APIs with GraphQL without breaking existing clients.",
-                },
-            ],
-            createdAt: new Date("2023-08-01T09:00:00Z"),
-        },
-    ];
-
+const Home = async () => {
+    const result = await getQuestions({});
     return (
         <>
             <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -125,8 +40,8 @@ const Home = () => {
             </div>
             <HomeFilters />
             <div className="mt-10 flex w-full flex-col gap-6">
-                {questions.length > 0 ? (
-                    questions.map((question) => (
+                {result.questions.length > 0 ? (
+                    result.questions.map((question) => (
                         <QuestionCard
                             key={question._id}
                             _id={question._id}
