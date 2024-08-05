@@ -10,6 +10,7 @@ import Link from "next/link";
 import React from "react";
 
 const Home = async () => {
+    console.log("hi there");
     const result = await getQuestions({});
     return (
         <>
