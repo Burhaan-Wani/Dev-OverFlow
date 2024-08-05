@@ -53,6 +53,7 @@ export async function POST(req: Request) {
     // Do something with the payload
     // For this guide, you simply log the payload to the console
     const eventType = evt.type;
+
     if (eventType === "user.created") {
         const {
             id,
@@ -72,6 +73,7 @@ export async function POST(req: Request) {
         });
         return NextResponse.json({ message: "OK", user: mongoUser });
     }
+
     if (eventType === "user.updated") {
         const {
             id,
